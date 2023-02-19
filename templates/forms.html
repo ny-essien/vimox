@@ -1,0 +1,67 @@
+{% for message in messages %}
+
+    {{message}}
+    
+{% endfor %}
+
+{% if page == 'profile' %}
+
+        <div>
+
+            <form action="" method="post">
+
+                {% csrf_token %}
+                {{ forms }}
+                <input type="submit">
+            </form>
+
+        </div>
+
+{% elif page == 'contact' %}
+        <div>
+
+            <form action="" method="post">
+
+                {% csrf_token %}
+
+                {{ forms.non_field_errors }}
+
+                <div class="field-wrapper">
+
+                    {{ forms.subject.errors }}
+                    <label for="{{ forms.subject.id_for_label }}">Subject: </label>
+                    {{ forms.subject }}
+
+                </div>
+
+                <div class="field-wrapper">
+
+                    {{forms.message.errors }}
+                    <label for="{{ forms.message.id_for_label }}">Message:</label>
+                    {{ forms.message }}
+
+                </div>
+
+                <div class="field-wrapper">
+                    {{ forms.sender.errors }}
+                    <label for="{{ forms.sender.id_for_label}}">Sender:</label>
+                    {{forms.sender}}
+
+                </div>
+
+                <div class="field-wrapper">
+
+                    {{forms.cc_myself.errors}}
+                    <label for="{{ forms.cc_myself.id_for_label}}">cc_myself</label>
+                    {{forms.cc_myself}}
+
+                </div>
+
+                <input type="submit" value="Send">
+
+            </form>
+
+
+        </div>
+{% endif %}
+
